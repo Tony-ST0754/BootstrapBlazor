@@ -26,5 +26,8 @@ jobs:
           git remote add upstream https://github.com/dotnetcore/BootstrapBlazor.git
           git fetch upstream
           git checkout main
+          # 设置 Git 身份（必须，否则 merge 会报错）
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
           git merge upstream/main
           git push origin main
