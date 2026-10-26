@@ -110,6 +110,22 @@ public class JSModuleTest
         await module.SetMemorialModeAsync(true);
     }
 
+    [Fact]
+    public async Task JSModule_GetMemorial()
+    {
+        var js = new MockTaskCanceledObjectReference();
+        var module = new JSModule(js);
+        await module.GetMemorialModeAsync();
+    }
+
+    [Fact]
+    public async Task JSModule_ToggleMemorial()
+    {
+        var js = new MockTaskCanceledObjectReference();
+        var module = new JSModule(js);
+        await module.ToggleMemorialModeAsync();
+    }
+
     private class MockErrorJSObjectReference : MockJSObjectReference
     {
         protected override ValueTask DisposeAsyncCore(bool disposing)
@@ -132,7 +148,10 @@ public class JSModuleTest
 
         public async ValueTask DisposeAsync()
         {
+            // TODO: NET 11 误报警告
+#pragma warning disable BL0016 // Unguarded JS interop call
             await DisposeAsyncCore(true);
+#pragma warning restore BL0016 // Unguarded JS interop call
             GC.SuppressFinalize(this);
         }
 
