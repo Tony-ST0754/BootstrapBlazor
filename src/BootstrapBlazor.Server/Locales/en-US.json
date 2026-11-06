@@ -1727,7 +1727,14 @@
     "BlockGroupTitle": "InputGroup",
     "DateTimeOffsetIntro": "Select the control based on the date of the day in 「day」 as the base unit",
     "DateTimeOffsetTitle": "Click on the pop-up date box",
-    "DateTimePickerIntro": "Select the hour, minute, and second on the clock dial to obtain the current date and time.",
+    "DateTimePickerIntro": "Select the time using dropdowns or a clock dial to obtain the date and time.",
+    "DateTimePickerParameters": "Parameters:",
+    "DateTimePickerIsButtonIntro": "<code>IsButton</code> controls whether DateTimePicker is displayed as a button or an input field",
+    "DateTimePickerPickTimeModeIntro": "<code>PickTimeMode</code> controls whether the time picker uses dropdowns or a clock. In <code>Clock</code> mode, click a time value in the <b>Header</b> to switch to the clock dial, then drag to select the time. In <code>Dropdown</code> mode, select the time using dropdowns",
+    "DateTimePickerIsButtonLabel": "Button mode",
+    "DateTimePickerPickTimeModeLabel": "Time picker mode",
+    "DateTimePickerDropdownText": "Dropdown",
+    "DateTimePickerClockText": "Clock",
     "DateTimePickerTitle": "Select the time",
     "DayTemplateIntro": "By setting the <code>DayTemplate</code> custom display template, the disabled date template is <code>DayDisabledTemplate</code>",
     "DayTemplateTitle": "Custom date display",
@@ -4845,6 +4852,7 @@
     "TablesAutoRefreshNormalTitle": "Auto Refresh"
   },
   "BootstrapBlazor.Server.Components.Samples.Table.TablesCell": {
+    "TableCellOnCellRenderTip": "<code>OnCellRender</code> is designed to customize the rendering of individual cells and complements the <code>Template</code> of <code>TableColumn</code>. When <code>OnCellRender</code> is used, the column's <code>Template</code> is ignored. Use <code>Value</code> for simple custom rendering and <code>ValueTemplate</code> for more complex rendering",
     "TableCellMergeCellIntro": "Basic table display usage",
     "TableCellMergeCellTip": "In this example, by setting the <code>OnCellRenderHandler</code> callback delegate, the cell merge operation is performed on the two columns <code>Name</code> and <code>Address</code> through the judgment condition, And set the background color of the merged cell by setting the <code>TableCellArgs</code> attribute <code>Class</code> value to <code>cell-demo</code> style sheet name",
     "TableCellMergeCellTitle": "Merge Cells",
