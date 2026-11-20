@@ -7,18 +7,27 @@
   </Target>
 
   <Target Name="CopyXmlDocs2Output" BeforeTargets="Build" DependsOnTargets="CollectXmlDocs">
-    <Message Text="Copying XML docs to output path: $(OutputPath)" Importance="High" />
+    <Message Text="Copying XML docs to output path: $(OutputPath)" Importance="high" />
     <Copy SourceFiles="@(XmlDocsToCopy)" DestinationFolder="$(OutputPath)" />
   </Target>
 
   <Target Name="LLMs" AfterTargets="Publish">
-    <Message Text="LLMs documentation generating ..." Importance="high"></Message>
-    <Exec Command="dotnet tool restore"></Exec>
-    <Exec Command="dotnet llms-docs --output=$(PublishDir)"></Exec>
+    <PropertyGroup>
+      <LlmsScript>$(MSBuildThisFileDirectory)..\..\scripts\llms\GenerateLlmsDocs.cs</LlmsScript>
+      <LlmsCoreDocs>$(IntermediateOutputPath)llms-core</LlmsCoreDocs>
+      <LlmsWorkingDirectory>$(IntermediateOutputPath)llms</LlmsWorkingDirectory>
+      <LlmsPublishDirectory>$(PublishDir)wwwroot\llms</LlmsPublishDirectory>
+    </PropertyGroup>
+    <Message Text="Generating BootstrapBlazor package skill docs ..." Importance="high" />
+    <Exec Command="dotnet tool restore" />
+    <Exec Command='dotnet llms-docs --project "$(MSBuildThisFileDirectory)..\BootstrapBlazor" --output "$(LlmsCoreDocs)"' />
+    
+    <Message Text="Generating BootstrapBlazor.Extensions package skill docs ..." Importance="high" />
+    <Exec Command='dotnet run --file "$(LlmsScript)" -- "$(ProjectAssetsFile)" "$(TargetFramework)" "$(LlmsCoreDocs)" "$(LlmsWorkingDirectory)" "$(LlmsPublishDirectory)"' />
   </Target>
 
   <Target Name="CopyXmlDocs2Publish" AfterTargets="LLMs" DependsOnTargets="CollectXmlDocs">
-    <Message Text="Copying XML docs to publish path: $(PublishDir)" Importance="High" />
+    <Message Text="Copying XML docs to publish path: $(PublishDir)" Importance="high" />
     <Copy SourceFiles="@(XmlDocsToCopy)" DestinationFolder="$(PublishDir)" />
   </Target>
 
